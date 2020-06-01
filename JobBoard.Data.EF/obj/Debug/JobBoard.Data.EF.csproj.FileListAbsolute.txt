@@ -1,0 +1,12 @@
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\bin\Debug\JobBoard.Data.EF.dll.config
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\bin\Debug\JobBoard.Data.EF.dll
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\bin\Debug\JobBoard.Data.EF.pdb
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\bin\Debug\EntityFramework.dll
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\bin\Debug\EntityFramework.xml
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\obj\Debug\JobBoard.Data.EF.csprojAssemblyReference.cache
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\obj\Debug\JobBoard.Data.EF.csproj.CoreCompileInputs.cache
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\obj\Debug\JobBoard.Data.EF.csproj.CopyComplete
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\obj\Debug\JobBoard.Data.EF.dll
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.Data.EF\obj\Debug\JobBoard.Data.EF.pdb

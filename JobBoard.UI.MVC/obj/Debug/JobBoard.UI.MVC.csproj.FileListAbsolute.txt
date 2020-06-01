@@ -50,7 +50,6 @@ C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\s
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\Antlr3.Runtime.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\EntityFramework.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\EntityFramework.SqlServer.dll
-C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\JobBoard.Data.EF.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -75,7 +74,6 @@ C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\s
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\System.Web.WebPages.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\System.Web.WebPages.Razor.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\WebGrease.dll
-C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\JobBoard.Data.EF.pdb
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\System.Web.Helpers.xml
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\System.Web.Mvc.xml
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\System.Web.Optimization.xml
