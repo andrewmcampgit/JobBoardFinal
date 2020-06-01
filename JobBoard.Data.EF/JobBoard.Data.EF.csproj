@@ -56,7 +56,6 @@
     <Compile Include="ApplicationStatu.cs">
       <DependentUpon>JobBoard.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="JobBoard.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +74,7 @@
     <Compile Include="Location.cs">
       <DependentUpon>JobBoard.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata\JobBoardMetadata.cs" />
     <Compile Include="OpenPosition.cs">
       <DependentUpon>JobBoard.tt</DependentUpon>
     </Compile>
