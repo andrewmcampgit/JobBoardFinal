@@ -11,18 +11,9 @@
     <Property Name="ManagerNotes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="ApplicationStatusId" Type="Int32" Nullable="false" />
     <Property Name="ResumeFilename" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="ApplicationStatu" Relationship="Self.FK_Applications_ApplicationStatus" FromRole="Applications" ToRole="ApplicationStatus" />
     <NavigationProperty Name="OpenPosition" Relationship="Self.FK_Applications_OpenPositions" FromRole="Applications" ToRole="OpenPositions" />
     <NavigationProperty Name="UserDetail" Relationship="Self.FK_Applications_UserDetails" FromRole="Applications" ToRole="UserDetails" />
-  </EntityType>
-  <EntityType Name="ApplicationStatu">
-    <Key>
-      <PropertyRef Name="ApplicationStatusId" />
-    </Key>
-    <Property Name="ApplicationStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="StatusDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_ApplicationStatus" FromRole="ApplicationStatus" ToRole="Applications" />
+    <NavigationProperty Name="ApplicationStatu" Relationship="JobBoardModel.FK_Applications_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatu" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
@@ -67,18 +58,6 @@
     <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_UserDetails" FromRole="UserDetails" ToRole="Applications" />
     <NavigationProperty Name="Locations" Relationship="Self.FK_Locations_UserDetails" FromRole="UserDetails" ToRole="Locations" />
   </EntityType>
-  <Association Name="FK_Applications_ApplicationStatus">
-    <End Role="ApplicationStatus" Type="Self.ApplicationStatu" Multiplicity="1" />
-    <End Role="Applications" Type="Self.Application" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ApplicationStatus">
-        <PropertyRef Name="ApplicationStatusId" />
-      </Principal>
-      <Dependent Role="Applications">
-        <PropertyRef Name="ApplicationStatusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Applications_OpenPositions">
     <End Role="OpenPositions" Type="Self.OpenPosition" Multiplicity="1" />
     <End Role="Applications" Type="Self.Application" Multiplicity="*" />
@@ -141,15 +120,10 @@
   </Association>
   <EntityContainer Name="JobBoardEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Applications" EntityType="Self.Application" />
-    <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatu" />
     <EntitySet Name="Locations" EntityType="Self.Location" />
     <EntitySet Name="OpenPositions" EntityType="Self.OpenPosition" />
     <EntitySet Name="Positions" EntityType="Self.Position" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
-    <AssociationSet Name="FK_Applications_ApplicationStatus" Association="Self.FK_Applications_ApplicationStatus">
-      <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
-      <End Role="Applications" EntitySet="Applications" />
-    </AssociationSet>
     <AssociationSet Name="FK_Applications_OpenPositions" Association="Self.FK_Applications_OpenPositions">
       <End Role="OpenPositions" EntitySet="OpenPositions" />
       <End Role="Applications" EntitySet="Applications" />
@@ -170,5 +144,31 @@
       <End Role="Positions" EntitySet="Positions" />
       <End Role="OpenPositions" EntitySet="OpenPositions" />
     </AssociationSet>
+    <EntitySet Name="ApplicationStatus" EntityType="JobBoardModel.ApplicationStatu" />
+    <AssociationSet Name="FK_Applications_ApplicationStatus" Association="JobBoardModel.FK_Applications_ApplicationStatus">
+      <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ApplicationStatu">
+    <Key>
+      <PropertyRef Name="ApplicationStatusId" />
+    </Key>
+    <Property Name="ApplicationStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StatusDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Applications" Relationship="JobBoardModel.FK_Applications_ApplicationStatus" FromRole="ApplicationStatu" ToRole="Application" />
+  </EntityType>
+  <Association Name="FK_Applications_ApplicationStatus">
+    <End Type="JobBoardModel.ApplicationStatu" Role="ApplicationStatu" Multiplicity="1" />
+    <End Type="JobBoardModel.Application" Role="Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationStatu">
+        <PropertyRef Name="ApplicationStatusId" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="ApplicationStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

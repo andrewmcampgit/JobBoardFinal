@@ -12,12 +12,30 @@ namespace JobBoard.Data.EF
 
     public class ApplicationMetadata
     {
-
+        [StringLength(128, ErrorMessage = "Must be less than 128 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "User")]
         public string UserId { get; set; }
+
+        
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Open Position")]
         public int OpenPositionId { get; set; }
+
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Application Date")]
         public System.DateTime ApplicationDate { get; set; }
+
+        [Display(Name = "Manager Notes")]
+        [DisplayFormat(NullDisplayText = "[N/A]")]
         public string ManagerNotes { get; set; }
+
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Application Status")]
         public int ApplicationStatusId { get; set; }
+
+        [Display(Name = "Resume")]
+        [DisplayFormat(NullDisplayText = "[N/A]")]
         public string ResumeFilename { get; set; }
 
         
@@ -27,7 +45,15 @@ namespace JobBoard.Data.EF
     public partial class ApplicationStatu { }
     public class ApplicationStatusMetadata
     {
-        public string StudentName { get; set; }
+        [StringLength(50, ErrorMessage = "Must be less than 50 characters")]
+
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Status Name")]
+        public string StatusName { get; set; }
+
+        [StringLength(250, ErrorMessage = "Must be less than 250 characters")]
+        [Display(Name = "Status Description")]
+        [DisplayFormat(NullDisplayText = "[N/A]")]
         public string StatusDescription { get; set; }
     }
 
@@ -35,9 +61,22 @@ namespace JobBoard.Data.EF
     public partial class Location { }
     public class LocationMetadata
     {
+        [StringLength(10, ErrorMessage = "Must be less than 10 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Store Number")]
         public string StoreNumber { get; set; }
+
+        [StringLength(50, ErrorMessage = "Must be less than 50 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
         public string City { get; set; }
+
+        [StringLength(2, ErrorMessage = "Must be less than 2 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
         public string State { get; set; }
+
+        [StringLength(128, ErrorMessage = "Must be less than 128 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Manager Id")]
         public string ManagerId { get; set; }
 
 
@@ -47,8 +86,9 @@ namespace JobBoard.Data.EF
     public partial class OpenPosition { }
     public class OpenPositionMetadata
     {
-        public int OpenPositionId { get; set; }
+        [Required(ErrorMessage = "Please insert a valid entry")]
         public int LocationId { get; set; }
+        [Required(ErrorMessage = "Please insert a valid entry")]
         public int PositionId { get; set; }
 
     }
@@ -57,8 +97,11 @@ namespace JobBoard.Data.EF
     public partial class Position { }
     public class PositionMetadata
     {
-        public int PositionId { get; set; }
+        [StringLength(50, ErrorMessage = "Must be less than 50 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
         public string Title { get; set; }
+
+        [DisplayFormat(NullDisplayText = "[N/A]")]
         public string JobDescription { get; set; }
 
     }
@@ -75,9 +118,18 @@ namespace JobBoard.Data.EF
     }
     public class UserDetailMetadata
     {
-        
+        [StringLength(50, ErrorMessage = "Must be less than 50 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [StringLength(50, ErrorMessage = "Must be less than 50 characters")]
+        [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [StringLength(75, ErrorMessage = "Must be less than 75 characters")]
+        [DisplayFormat(NullDisplayText ="[N/A]")]
+        [Display(Name = "First Name")]
         public string ResumeFileName { get; set; }
 
     }

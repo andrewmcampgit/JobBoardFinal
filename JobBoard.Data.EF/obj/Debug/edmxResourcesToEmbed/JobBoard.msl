@@ -14,15 +14,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ApplicationStatus">
-      <EntityTypeMapping TypeName="JobBoardModel.ApplicationStatu">
-        <MappingFragment StoreEntitySet="ApplicationStatus">
-          <ScalarProperty Name="ApplicationStatusId" ColumnName="ApplicationStatusId" />
-          <ScalarProperty Name="StudentName" ColumnName="StudentName" />
-          <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Locations">
       <EntityTypeMapping TypeName="JobBoardModel.Location">
         <MappingFragment StoreEntitySet="Locations">
@@ -59,6 +50,15 @@
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="ResumeFileName" ColumnName="ResumeFileName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationStatus">
+      <EntityTypeMapping TypeName="JobBoardModel.ApplicationStatu">
+        <MappingFragment StoreEntitySet="ApplicationStatus">
+          <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="ApplicationStatusId" ColumnName="ApplicationStatusId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

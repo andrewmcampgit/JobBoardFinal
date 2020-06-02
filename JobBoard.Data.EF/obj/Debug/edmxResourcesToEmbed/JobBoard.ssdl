@@ -17,7 +17,7 @@
       <PropertyRef Name="ApplicationStatusId" />
     </Key>
     <Property Name="ApplicationStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StudentName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="StatusDescription" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="Locations">
