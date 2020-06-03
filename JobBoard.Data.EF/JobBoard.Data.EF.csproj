@@ -56,6 +56,9 @@
     <Compile Include="ApplicationStatu.cs">
       <DependentUpon>JobBoard.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>JobBoard.tt</DependentUpon>
+    </Compile>
     <Compile Include="JobBoard.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

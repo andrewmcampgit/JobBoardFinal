@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,17 +47,31 @@ namespace JobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail)
+        public ActionResult Create([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail
+            , HttpPostedFileBase resumeFile)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (resumeFile != null)
+                {
+                    fileName = Guid.NewGuid() + ".pdf";
+
+                    string path = Server.MapPath("~/Content/Resumes/");
+                    resumeFile.SaveAs(path + fileName);
+                    userDetail.ResumeFileName = fileName;
+                }
+                
+                
+                   
+                }
+
                 db.UserDetails.Add(userDetail);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(userDetail);
-        }
+         
 
         // GET: UserDetails/Edit/5
         public ActionResult Edit(string id)
@@ -78,10 +93,28 @@ namespace JobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail)
+        public ActionResult Edit([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail,
+            HttpPostedFileBase resumeFile)
         {
             if (ModelState.IsValid)
             {
+                if (resumeFile != null)
+                {
+                    string path = Server.MapPath("~/Content/Resumes/");
+
+                    if (userDetail.ResumeFileName != null)
+                    {
+                        FileInfo file = new FileInfo(path + userDetail.ResumeFileName);
+                        file.Delete();
+                    }
+                    string fileName = Guid.NewGuid() + ".pdf";
+
+                    resumeFile.SaveAs(path + fileName);
+                    userDetail.ResumeFileName = fileName;
+
+
+                }
+
                 db.Entry(userDetail).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,11 +1,14 @@
-﻿using JobBoard.UI.MVC.Models;
+﻿using JobBoard.Data.EF;
+using JobBoard.UI.MVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace JobBoard.UI.MVC.Controllers
 {
@@ -145,7 +148,7 @@ namespace JobBoard.UI.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase resumeFile)
         {
             if (ModelState.IsValid)
             {
@@ -153,11 +156,31 @@ namespace JobBoard.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    #region Dealing with Custom User Details
+                    UserDetail newUserDeets = new UserDetail();
+                    newUserDeets.UserId = user.Id; newUserDeets.FirstName = model.FirstName; newUserDeets.LastName = model.LastName;
+
+                    string fileName = "no.pdf";
+                    if (resumeFile != null)
+                    {
+                        fileName = Guid.NewGuid() + ".pdf";
+
+                        string path = Server.MapPath("~/Content/Resumes/");
+                       resumeFile.SaveAs(path + fileName);
+                        newUserDeets.ResumeFileName = fileName;
+                    }
+
+                    JobBoardEntities db = new JobBoardEntities();
+                    db.UserDetails.Add(newUserDeets);
+
+                    db.SaveChanges();
+                    UserManager.AddToRole(user.Id, "Employee");
+                    ViewBag.RegConfirmed = "Thank You! You have successfully registered a new account. Please Log in.";
+
+                    #endregion
+                    
+                    
+                    return View("Login");
                 }
                 AddErrors(result);
             }

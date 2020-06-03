@@ -28,6 +28,7 @@ namespace JobBoard.Data.EF
 
         [Display(Name = "Manager Notes")]
         [DisplayFormat(NullDisplayText = "[N/A]")]
+        [UIHint("MultilineText")]
         public string ManagerNotes { get; set; }
 
         [Required(ErrorMessage = "Please insert a valid entry")]
@@ -54,6 +55,7 @@ namespace JobBoard.Data.EF
         [StringLength(250, ErrorMessage = "Must be less than 250 characters")]
         [Display(Name = "Status Description")]
         [DisplayFormat(NullDisplayText = "[N/A]")]
+        [UIHint("MultilineText")]
         public string StatusDescription { get; set; }
     }
 
@@ -99,9 +101,12 @@ namespace JobBoard.Data.EF
     {
         [StringLength(50, ErrorMessage = "Must be less than 50 characters")]
         [Required(ErrorMessage = "Please insert a valid entry")]
+        [Display(Name = "Position Title")]
         public string Title { get; set; }
 
         [DisplayFormat(NullDisplayText = "[N/A]")]
+        [Display(Name = "Job Description")]
+        [UIHint("MultilineText")]
         public string JobDescription { get; set; }
 
     }
@@ -129,7 +134,7 @@ namespace JobBoard.Data.EF
 
         [StringLength(75, ErrorMessage = "Must be less than 75 characters")]
         [DisplayFormat(NullDisplayText ="[N/A]")]
-        [Display(Name = "First Name")]
+        [Display(Name = "Resume")]
         public string ResumeFileName { get; set; }
 
     }

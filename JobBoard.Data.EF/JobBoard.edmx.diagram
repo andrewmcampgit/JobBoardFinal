@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="JobBoardModel.Location" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="JobBoardModel.OpenPosition" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="JobBoardModel.Position" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JobBoardModel.UserDetail" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JobBoardModel.UserDetail" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="JobBoardModel.FK_Applications_OpenPositions" ManuallyRouted="false" />
         <AssociationConnector Association="JobBoardModel.FK_Applications_UserDetails" ManuallyRouted="false" />
         <AssociationConnector Association="JobBoardModel.FK_Locations_UserDetails" ManuallyRouted="false" />

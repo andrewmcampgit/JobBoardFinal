@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
@@ -141,6 +142,7 @@ namespace JobBoard.UI.MVC.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
+                
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
