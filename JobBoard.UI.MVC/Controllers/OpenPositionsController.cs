@@ -10,10 +10,11 @@ using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class OpenPositionsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
-
+        [Authorize(Roles = "Manager, Admin, Employee")]
         // GET: OpenPositions
         public ActionResult Index()
         {
@@ -21,6 +22,7 @@ namespace JobBoard.UI.MVC.Controllers
             return View(openPositions.ToList());
         }
 
+        [Authorize(Roles = "Manager, Admin, Employee")]
         // GET: OpenPositions/Details/5
         public ActionResult Details(int? id)
         {
@@ -62,7 +64,7 @@ namespace JobBoard.UI.MVC.Controllers
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", openPosition.PositionId);
             return View(openPosition);
         }
-
+        [Authorize(Roles = "Manager, Admin")]
         // GET: OpenPositions/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -10,17 +10,19 @@ using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
+   
     public class ApplicationsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
 
+        [Authorize(Roles = "Manager, Admin")]
         // GET: Applications
         public ActionResult Index()
         {
             var applications = db.Applications.Include(a => a.OpenPosition).Include(a => a.UserDetail).Include(a => a.ApplicationStatu);
             return View(applications.ToList());
         }
-
+        [Authorize(Roles = "Manager, Admin, Employee")]
         // GET: Applications/Details/5
         public ActionResult Details(int? id)
         {
