@@ -10,12 +10,12 @@ using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class LocationsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
 
-        [Authorize(Roles = "Admin, Manager")]
+        
         // GET: Locations
         public ActionResult Index()
         {

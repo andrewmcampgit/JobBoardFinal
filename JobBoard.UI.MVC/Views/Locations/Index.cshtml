@@ -41,9 +41,10 @@
             @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LocationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LocationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LocationId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.LocationId}, new { @class = "btn btn-dark" }) |
+
+            @Html.ActionLink("Details", "Details", new { id = item.LocationId }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.LocationId}, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

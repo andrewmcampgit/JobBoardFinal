@@ -38,6 +38,20 @@
 
 
     @Styles.Render("~/Content/css")
+    <style>
+        footer {
+            background: #42A5F5;
+            color: white;
+            line-height: 50px;
+            padding: 0 20px;
+        }
+        
+        main{
+            margin-bottom:200px;
+            
+        }
+
+    </style>
 </head>
 
 <body>
@@ -61,11 +75,11 @@
                     <li>@Html.ActionLink("Open Positions", "Index", "OpenPositions")</li>
                     <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
                     <li>@Html.ActionLink("Application Status", "Index", "ApplicationStatus")</li>
-
+                    <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
                     <li>
                         @Html.Partial("_LoginPartial")
                     </li>
-                    
+
                 </ul>
 
                 

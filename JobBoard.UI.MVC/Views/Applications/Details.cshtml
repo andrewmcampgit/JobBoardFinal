@@ -1,14 +1,13 @@
 ﻿@model JobBoard.Data.EF.Application
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details for " + Model.UserDetail.FullName + " Application";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Application</h4>
-    <hr />
+    
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ApplicationDate)
@@ -35,11 +34,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionId)
+            Position Applied For:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OpenPosition.OpenPositionId)
+            @Html.DisplayFor(model => model.OpenPosition.Position.Title)
         </dd>
 
         <dt>
@@ -48,6 +47,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.UserDetail.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetail.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetail.LastName)
         </dd>
 
         <dt>
@@ -61,6 +67,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationId }, new { @class = "btn btn-dark" })  |
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-primary" })
 </p>
