@@ -36,14 +36,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ResumeFileName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img src="~/Content/Resumes/@Model.ResumeFileName" />
-                <input type="file" name="resumeFile" accept=".pdf"/>
+                <a href="@Url.Content("~/Content/Resumes/"+ Model.ResumeFileName)"  target="_blank">Current Resume</a>
+                
+                <input type="file" style="padding-top: 30px;" name="resumeFile" accept=".pdf"/>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit"  value="Save" class=" btn btn-success" />
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
@@ -15,14 +16,14 @@ namespace JobBoard.UI.MVC.Controllers
     {
         private JobBoardEntities db = new JobBoardEntities();
 
-        [Authorize(Roles = "Manager, Admin")]
+        
         // GET: Applications
         public ActionResult Index()
         {
             var applications = db.Applications.Include(a => a.OpenPosition).Include(a => a.UserDetail).Include(a => a.ApplicationStatu);
             return View(applications.ToList());
         }
-        [Authorize(Roles = "Manager, Admin, Employee")]
+        
         // GET: Applications/Details/5
         public ActionResult Details(int? id)
         {
@@ -56,6 +57,7 @@ namespace JobBoard.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Applications.Add(application);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -65,6 +67,30 @@ namespace JobBoard.UI.MVC.Controllers
             ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "FirstName", application.UserId);
             ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return View(application);
+        }
+
+        public ActionResult singleClickApply(string userId, int openPositionId, int applicationStatusId, string resumeFileName, Application application)
+        {
+            userId = User.Identity.GetUserId();
+            
+            applicationStatusId = 1;
+            resumeFileName = db.UserDetails.Where(r => r.UserId == userId).Select(u => u.ResumeFileName).FirstOrDefault();
+
+            application = new Application()
+            {
+                UserId = userId,
+                OpenPositionId = openPositionId,
+                ApplicationDate = DateTime.Now,
+                ApplicationStatusId = applicationStatusId,
+                ResumeFilename = resumeFileName
+
+            };
+
+            db.Applications.Add(application);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+            
         }
 
         // GET: Applications/Edit/5

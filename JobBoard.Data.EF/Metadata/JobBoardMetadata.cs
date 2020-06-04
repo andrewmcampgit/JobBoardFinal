@@ -24,6 +24,7 @@ namespace JobBoard.Data.EF
 
         [Required(ErrorMessage = "Please insert a valid entry")]
         [Display(Name = "Application Date")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public System.DateTime ApplicationDate { get; set; }
 
         [Display(Name = "Manager Notes")]

@@ -40,7 +40,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ResumeFileName)
+            <div class="col-md-10">
+                <a href="@Url.Content("~/Content/Resumes/"+ Model.ResumeFileName)" target="_blank">Click to View!</a>
+
+            </div>
         </dd>
 
     </dl>

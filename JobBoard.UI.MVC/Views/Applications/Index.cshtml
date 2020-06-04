@@ -14,9 +14,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ApplicationDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ManagerNotes)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.ResumeFilename)
         </th>
@@ -37,11 +35,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.ApplicationDate)
         </td>
+        
         <td>
-            @Html.DisplayFor(modelItem => item.ManagerNotes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ResumeFilename)
+            @if(item.ResumeFilename != null)
+            {
+            <a href="@Url.Content("~/Content/Resumes/"+ item.ResumeFilename)" target="_blank">View Resume</a>
+            }
+            else
+            {
+                    <p>N/A</p>
+            }
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.OpenPosition.OpenPositionId)
