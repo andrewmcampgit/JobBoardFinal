@@ -8,9 +8,9 @@
 <br />
 @if (User.IsInRole("Manager"))
 {
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
-</p>
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    </p>
 }
 <br />
 <table class="table">
@@ -30,34 +30,45 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position.Title)
-        </td>
-        @if (User.IsInRole("Employee"))
-        {
-        <td>
-            <div>
-                @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = item.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-center" }))
-                {
-                    <input type="submit" name="applyButton" class="btn btn-info btn-xs" value="Single Click Apply!" />
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position.Title)
+            </td>
+            @if (User.IsInRole("Employee"))
+            {
+                <td>
+                    <div>
+                        @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = item.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-center" }))
+                        {
+                            <input type="submit" name="applyButton" class="btn btn-info btn-xs" value="Single Click Apply!" />
+                        }
+
+                    </div>
+                </td>
+            }
+
+                <td>
+
+                    @if (User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }, new { @class = "btn btn-primary" })
+                    }
+                    else
+                    {
+
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }, new { @class = "btn btn-dark" }) @:|
+                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }, new { @class = "btn btn-primary" }) @:|
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId }, new { @class = "btn btn-danger" })
                 }
+                </td>
+        </tr>
+    }
 
-            </div>
-        </td>
-        }
-        
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }, new { @class = "btn btn-dark" }) |
-
-            @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId}, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
-    
 </table>

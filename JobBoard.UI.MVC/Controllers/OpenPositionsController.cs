@@ -10,12 +10,13 @@ using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-    
+    [Authorize(Roles = "Admin, Manager, Employee")]
     public class OpenPositionsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
-        
+
         // GET: OpenPositions
+        
         public ActionResult Index()
         {
             var openPositions = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
@@ -39,6 +40,7 @@ namespace JobBoard.UI.MVC.Controllers
         }
 
         // GET: OpenPositions/Create
+        [Authorize(Roles = "Manager")]
         public ActionResult Create()
         {
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City");
@@ -51,6 +53,7 @@ namespace JobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Create([Bind(Include = "OpenPositionId,LocationId,PositionId")] OpenPosition openPosition)
         {
             if (ModelState.IsValid)
@@ -87,6 +90,7 @@ namespace JobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager, Admin")]
         public ActionResult Edit([Bind(Include = "OpenPositionId,LocationId,PositionId")] OpenPosition openPosition)
         {
             if (ModelState.IsValid)
@@ -101,6 +105,7 @@ namespace JobBoard.UI.MVC.Controllers
         }
 
         // GET: OpenPositions/Delete/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +121,7 @@ namespace JobBoard.UI.MVC.Controllers
         }
 
         // POST: OpenPositions/Delete/5
+        [Authorize(Roles = "Manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

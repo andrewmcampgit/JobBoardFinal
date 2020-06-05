@@ -66,13 +66,15 @@
                     {
                         <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
                     }
-                    else
-                    {
-                        <li>@Html.ActionLink(" My Applications", "MyApplications", "Applications")</li>
-                    }
 
-                    <li>@Html.ActionLink("Application Status", "Index", "ApplicationStatus")</li>
-                    <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Application Status", "Index", "ApplicationStatus")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
+                    }
                     <li>
                         @Html.Partial("_LoginPartial")
                     </li>
