@@ -217,6 +217,7 @@
     <Content Include="Content\assets\img\comments-4.jpg" />
     <Content Include="Content\assets\img\comments-5.jpg" />
     <Content Include="Content\assets\img\comments-6.jpg" />
+    <Content Include="Content\assets\img\favicon-32x32.png" />
     <Content Include="Content\assets\img\favicon.png" />
     <Content Include="Content\assets\img\portfolio\portfolio-1.jpg" />
     <Content Include="Content\assets\img\portfolio\portfolio-2.jpg" />

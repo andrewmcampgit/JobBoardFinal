@@ -7,15 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobBoard.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-    
+
     public class LocationsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
 
-        
+
         // GET: Locations
         public ActionResult Index()
         {
@@ -41,8 +42,36 @@ namespace JobBoard.UI.MVC.Controllers
         // GET: Locations/Create
         public ActionResult Create()
         {
-            ViewBag.ManagerId = new SelectList(db.UserDetails, "UserId", "FirstName");
-            return View();
+            var currentUser = User.Identity.GetUserId();
+            if (User.IsInRole("Manager"))
+            {
+
+
+                var manager = db.UserDetails.Where(ud => ud.UserId == currentUser);
+                ViewBag.ManagerId = new SelectList(manager, "UserId", "FullName");
+                return View();
+            }
+            else
+            {
+                var manager = db.Locations;
+                var userDetails = db.UserDetails;
+                var details = new List<UserDetail>();
+                foreach (var item in manager)
+                {
+                    foreach (var ud in userDetails)
+                    {
+                        if (item.ManagerId == ud.UserId)
+                        {
+                            details.Add(ud);
+                        }
+                    }
+
+                }
+                ViewBag.ManagerId = new SelectList(details, "UserId", "FullName");
+                return View();
+            }
+
+
         }
 
         // POST: Locations/Create
@@ -58,8 +87,8 @@ namespace JobBoard.UI.MVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.ManagerId = new SelectList(db.UserDetails, "UserId", "FirstName", location.ManagerId);
+            //ViewBag.ManagerId = User.Identity.GetUserId();
+            ViewBag.ManagerId = new SelectList(db.UserDetails, "UserId", "FullName", location.ManagerId);
             return View(location);
         }
 
@@ -75,8 +104,36 @@ namespace JobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ManagerId = new SelectList(db.UserDetails, "UserId", "FirstName", location.ManagerId);
-            return View(location);
+
+            var currentUser = User.Identity.GetUserId();
+            if (User.IsInRole("Manager"))
+            {
+
+
+                var manager = db.UserDetails.Where(ud => ud.UserId == currentUser);
+                ViewBag.ManagerId = new SelectList(manager, "UserId", "FullName");
+                return View(location);
+            }
+            else
+            {
+                var manager = db.Locations;
+                var userDetails = db.UserDetails;
+                var details = new List<UserDetail>();
+                foreach (var item in manager)
+                {
+                    foreach (var ud in userDetails)
+                    {
+                        if (item.ManagerId == ud.UserId)
+                        {
+                            details.Add(ud);
+                        }
+                    }
+
+                }
+                ViewBag.ManagerId = new SelectList(details, "UserId", "FullName");
+                return View(location);
+            }
+            
         }
 
         // POST: Locations/Edit/5

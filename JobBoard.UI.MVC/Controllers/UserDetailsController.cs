@@ -11,18 +11,18 @@ using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-    [Authorize(Roles = "Employee")]
+    
     public class UserDetailsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
 
-        [Authorize(Roles = "Manager, Admin")]
+        
         // GET: UserDetails
         public ActionResult Index()
         {
             return View(db.UserDetails.ToList());
         }
-        [Authorize(Roles = "Manager, Admin, Employee")]
+        
         // GET: UserDetails/Details/5
         public ActionResult Details(string id)
         {
