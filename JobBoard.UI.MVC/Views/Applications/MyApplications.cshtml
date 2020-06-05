@@ -1,0 +1,67 @@
+﻿@model IEnumerable<JobBoard.Data.EF.Application>
+
+@{
+    ViewBag.Title = "My Applications";
+   
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationDate)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.ResumeFilename)
+        </th>
+        <th>
+            Position
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserDetail.FullName)
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationDate)
+        </td>
+        
+        <td>
+            @if (item.ResumeFilename != null)
+            {
+                <a href="@Url.Content("~/Content/Resumes/"+ item.ResumeFilename)" target="_blank">View Resume</a>
+            }
+            else
+            {
+                <p>N/A</p>
+            }
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserDetail.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+        </td>
+        <td>
+            
+            @Html.ActionLink("Details", "Details", new { id=item.ApplicationId }, new { @class = "btn btn-primary" }) 
+            
+        </td>
+    </tr>
+}
+
+</table>

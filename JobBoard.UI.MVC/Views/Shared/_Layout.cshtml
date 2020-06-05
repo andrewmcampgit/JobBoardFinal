@@ -62,7 +62,15 @@
                     <li>@Html.ActionLink("Positions", "Index", "Positions")</li>
                     <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
                     <li>@Html.ActionLink("Open Positions", "Index", "OpenPositions")</li>
-                    <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
+                    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink(" My Applications", "MyApplications", "Applications")</li>
+                    }
+
                     <li>@Html.ActionLink("Application Status", "Index", "ApplicationStatus")</li>
                     <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
                     <li>

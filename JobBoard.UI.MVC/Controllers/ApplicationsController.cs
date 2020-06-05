@@ -11,19 +11,27 @@ using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-   
+   [Authorize(Roles ="Admin, Manager, Employee")]
     public class ApplicationsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
 
-        
+        [Authorize(Roles = "Admin, Manager")]
         // GET: Applications
         public ActionResult Index()
         {
             var applications = db.Applications.Include(a => a.OpenPosition).Include(a => a.UserDetail).Include(a => a.ApplicationStatu);
             return View(applications.ToList());
         }
-        
+        [Authorize(Roles = "Employee")]
+        public ActionResult MyApplications()
+        {
+            var userId = User.Identity.GetUserId();
+            var applications = db.Applications.Where(u => u.UserId == userId).Include(a => a.OpenPosition).Include(a => a.UserDetail).Include(a => a.ApplicationStatu);
+            return View(applications.ToList());
+        }
+
+        [Authorize(Roles = "Admin, Manager, Employee")]
         // GET: Applications/Details/5
         public ActionResult Details(int? id)
         {
@@ -38,7 +46,7 @@ namespace JobBoard.UI.MVC.Controllers
             }
             return View(application);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Applications/Create
         public ActionResult Create()
         {
@@ -51,6 +59,7 @@ namespace JobBoard.UI.MVC.Controllers
         // POST: Applications/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ApplicationId,UserId,OpenPositionId,ApplicationDate,ManagerNotes,ApplicationStatusId,ResumeFilename")] Application application)
@@ -68,7 +77,7 @@ namespace JobBoard.UI.MVC.Controllers
             ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return View(application);
         }
-
+        
         public ActionResult singleClickApply(string userId, int openPositionId, int applicationStatusId, string resumeFileName, Application application)
         {
             userId = User.Identity.GetUserId();
@@ -88,11 +97,11 @@ namespace JobBoard.UI.MVC.Controllers
 
             db.Applications.Add(application);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyApplications");
 
             
         }
-
+        [Authorize(Roles = "Manager")]
         // GET: Applications/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -114,6 +123,7 @@ namespace JobBoard.UI.MVC.Controllers
         // POST: Applications/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ApplicationId,UserId,OpenPositionId,ApplicationDate,ManagerNotes,ApplicationStatusId,ResumeFilename")] Application application)
@@ -129,7 +139,7 @@ namespace JobBoard.UI.MVC.Controllers
             ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return View(application);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Applications/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -144,7 +154,7 @@ namespace JobBoard.UI.MVC.Controllers
             }
             return View(application);
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: Applications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

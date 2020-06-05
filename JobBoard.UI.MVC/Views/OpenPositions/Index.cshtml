@@ -21,8 +21,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Position.Title)
         </th>
-        <th></th>
-        
+        @if (User.IsInRole("Employee"))
+        {
+            <th></th>
+        }
+
+
         <th></th>
     </tr>
 
@@ -34,7 +38,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.Position.Title)
         </td>
-
+        @if (User.IsInRole("Employee"))
+        {
         <td>
             <div>
                 @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = item.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-center" }))
@@ -44,6 +49,8 @@
 
             </div>
         </td>
+        }
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }, new { @class = "btn btn-dark" }) |
 
