@@ -16,13 +16,13 @@ namespace JobBoard.UI.MVC.Controllers
     {
         private JobBoardEntities db = new JobBoardEntities();
 
-        
+        [Authorize(Roles = "Manager, Admin")]
         // GET: UserDetails
         public ActionResult Index()
         {
             return View(db.UserDetails.ToList());
         }
-        
+        [Authorize(Roles ="Employee, Manager, Admin")]
         // GET: UserDetails/Details/5
         public ActionResult Details(string id)
         {
@@ -37,7 +37,7 @@ namespace JobBoard.UI.MVC.Controllers
             }
             return View(userDetail);
         }
-
+        [Authorize(Roles = "Employee")]
         // GET: UserDetails/Create
         public ActionResult Create()
         {
@@ -49,6 +49,7 @@ namespace JobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
         public ActionResult Create([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail
             , HttpPostedFileBase resumeFile)
         {
@@ -73,9 +74,10 @@ namespace JobBoard.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-         
+
 
         // GET: UserDetails/Edit/5
+        [Authorize(Roles = "Employee")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -95,6 +97,7 @@ namespace JobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
         public ActionResult Edit([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail,
             HttpPostedFileBase resumeFile)
         {
@@ -125,6 +128,7 @@ namespace JobBoard.UI.MVC.Controllers
         }
 
         // GET: UserDetails/Delete/5
+        [Authorize(Roles = "Employee")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -142,6 +146,7 @@ namespace JobBoard.UI.MVC.Controllers
         // POST: UserDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
         public ActionResult DeleteConfirmed(string id)
         {
             UserDetail userDetail = db.UserDetails.Find(id);
