@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<JobBoard.Data.EF.Position>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Company Positions";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success"})
 </p>
 <table class="table">
     <tr>
