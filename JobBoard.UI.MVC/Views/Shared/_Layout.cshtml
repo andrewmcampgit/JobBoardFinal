@@ -138,6 +138,19 @@
     @*<script src="~/Content/assets/js/main.js"></script>*@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        //adds a class=row to every form
+        $(".form-horizontal").wrap("<div class='row'></div>");
+
+        //gives paddingLeft to form group child elements
+        let formGroup = document.querySelectorAll(".form-group div");
+
+        for (let i = 0; i < formGroup.length; i++) {
+            formGroup[i].style.paddingLeft = "50px";
+
+        }
+        
+    </script>
 
 </body>
 
