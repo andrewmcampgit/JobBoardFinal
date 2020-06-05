@@ -1,21 +1,29 @@
 ﻿@model JobBoard.Data.EF.OpenPosition
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details for Available Position: " + Model.Position.Title;
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>OpenPosition</h4>
-    <hr />
+
+
+    <div>
+        @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = Model.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post))
+        {
+            <input type="submit" name="applyButton" class="btn btn-primary" value="Single Click Apply!" />
+        }
+        <br />
+        <br />
+    </div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Location.StoreNumber)
+            @Html.DisplayNameFor(model => model.Location.City)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Location.StoreNumber)
+            @Html.DisplayFor(model => model.Location.City)
         </dd>
 
         <dt>
@@ -32,18 +40,16 @@
         <dd>
             @Html.DisplayFor(model => model.Position.JobDescription)
         </dd>
-        <div>
-            @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = Model.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-center" }))
-            {
-            <input type="submit" name="applyButton" class="btn btn-primary" value="Single Click Apply!" />
-            }
 
-        </div>
-        
+
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OpenPositionId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("Manager"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.OpenPositionId }, new { @class = "btn btn-primary" }) @:|
+    }
+
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-dark" })
 </p>

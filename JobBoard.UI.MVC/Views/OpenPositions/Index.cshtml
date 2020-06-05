@@ -1,15 +1,18 @@
 ﻿@model IEnumerable<JobBoard.Data.EF.OpenPosition>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Available Positions";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+@if (User.IsInRole("Manager"))
+{
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+</p>
 }
 <br />
-<br />
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -18,7 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Position.Title)
         </th>
-        <th>Resume</th>
+        <th></th>
         
         <th></th>
     </tr>
@@ -36,7 +39,7 @@
             <div>
                 @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = item.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-center" }))
                 {
-                    <input type="submit" name="applyButton" class="btn btn-primary" value="Single Click Apply!" />
+                    <input type="submit" name="applyButton" class="btn btn-info btn-xs" value="Single Click Apply!" />
                 }
 
             </div>

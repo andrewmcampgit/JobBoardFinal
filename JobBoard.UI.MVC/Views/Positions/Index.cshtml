@@ -14,9 +14,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobDescription)
-        </th>
+        
         <th></th>
     </tr>
 
@@ -25,9 +23,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobDescription)
-        </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.PositionId}, new { @class = "btn btn-dark" }) |
 
