@@ -7,14 +7,14 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ApplicationDate)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.ResumeFilename)
         </th>
@@ -30,40 +30,48 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationDate)
-        </td>
-        
-        <td>
-            @if(item.ResumeFilename != null)
-            {
-            <a href="@Url.Content("~/Content/Resumes/"+ item.ResumeFilename)" target="_blank">View Resume</a>
-            }
-            else
-            {
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationDate)
+            </td>
+
+            <td>
+                @if (item.ResumeFilename != null)
+                {
+                    <a href="@Url.Content("~/Content/Resumes/"+ item.ResumeFilename)" target="_blank">View Resume</a>
+                }
+                else
+                {
                     <p>N/A</p>
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetail.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+            </td>
+            @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Employee"))
+            {
+
+                <td>
+
+                    @if (User.IsInRole("Manager"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }, new { @class = "btn btn-dark" })
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-primary" })
+
+
+                </td>
             }
-
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }, new { @class = "btn btn-dark" }) |
-           
-            @Html.ActionLink("Details", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId }, new { @class = "btn btn-danger" })
-
-        </td>
-    </tr>
-}
+        </tr>
+    }
 
 </table>

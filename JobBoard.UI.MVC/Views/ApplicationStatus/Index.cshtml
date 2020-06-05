@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<JobBoard.Data.EF.ApplicationStatu>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Application Statuses";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.StatusDescription)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationStatusId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ApplicationStatusId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationStatusId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationStatusId }, new { @class = "btn btn-dark" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ApplicationStatusId }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationStatusId }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
