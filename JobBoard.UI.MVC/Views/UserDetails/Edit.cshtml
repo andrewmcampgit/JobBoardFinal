@@ -1,19 +1,18 @@
 ﻿@model JobBoard.Data.EF.UserDetail
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit User: " + Model.FullName;
 }
 
-<h2>Edit</h2>
-
+<h2>@ViewBag.Title</h2>
+<br /><br />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>UserDetail</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.UserId)
 
@@ -36,22 +35,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ResumeFileName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <a href="@Url.Content("~/Content/Resumes/"+ Model.ResumeFileName)"  target="_blank">Current Resume</a>
-                
-                <input type="file" style="padding-top: 30px;" name="resumeFile" accept=".pdf"/>
+                <a href="@Url.Content("~/Content/Resumes/"+ Model.ResumeFileName)" target="_blank">Current Resume</a>
+
+                <input id="fileUpload" type="file" style="padding-top: 15px; padding-bottom: 40px;" name="resumeFile" accept=".pdf" />
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit"  value="Save" class=" btn btn-success" />
+                <input type="submit" value="Save" class=" btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 </div>
 
 @section Scripts {
