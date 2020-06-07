@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using JobBoard.Data.EF;
+using System.Collections;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-   [Authorize(Roles ="Admin, Manager, Employee")]
+    [Authorize(Roles = "Admin, Manager, Employee")]
     public class ApplicationsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
@@ -20,8 +21,53 @@ namespace JobBoard.UI.MVC.Controllers
         // GET: Applications
         public ActionResult Index()
         {
-            var applications = db.Applications.Include(a => a.OpenPosition).Include(a => a.UserDetail).Include(a => a.ApplicationStatu);
-            return View(applications.ToList());
+            if (User.IsInRole("Admin"))
+            {
+                var applications = db.Applications.Include(a => a.OpenPosition).Include(a => a.UserDetail).Include(a => a.ApplicationStatu);
+                return View(applications.ToList());
+            }
+            else
+            {
+                var userID = User.Identity.GetUserId();
+
+
+                var managerLocation = db.Locations.Where(l => l.ManagerId == userID).FirstOrDefault();
+                var manLocID = managerLocation.LocationId;
+                var openPositions = db.OpenPositions.Where(o => o.LocationId == manLocID).ToList();
+
+                List<int> OPList = new List<int>();
+
+                List<int> manAppIds = new List<int>();
+
+                foreach (var item in openPositions)
+                {
+                    var Id = openPositions.Select(o => o.OpenPositionId).FirstOrDefault();
+                    OPList.Add(Id);
+                    var application = db.Applications.Select(o => o.OpenPositionId).FirstOrDefault();
+                    if (Id == application)
+                    {
+                        manAppIds.Add(application);
+                    }
+
+                }
+                List<Application> apps = new List<Application>();
+                foreach (var item in manAppIds)
+                {
+                    foreach (var a in db.Applications)
+                    {
+                        
+                        if (item == a.ApplicationId)
+                        {
+                            apps.Add(a);
+                        }
+                    }
+
+                }
+
+                return View(apps);
+            }
+
+
         }
         [Authorize(Roles = "Employee")]
         public ActionResult MyApplications()
@@ -77,11 +123,11 @@ namespace JobBoard.UI.MVC.Controllers
             ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return View(application);
         }
-        
+
         public ActionResult singleClickApply(string userId, int openPositionId, int applicationStatusId, string resumeFileName, Application application)
         {
             userId = User.Identity.GetUserId();
-            
+
             applicationStatusId = 1;
             resumeFileName = db.UserDetails.Where(r => r.UserId == userId).Select(u => u.ResumeFileName).FirstOrDefault();
 
@@ -99,7 +145,7 @@ namespace JobBoard.UI.MVC.Controllers
             db.SaveChanges();
             return RedirectToAction("MyApplications");
 
-            
+
         }
         [Authorize(Roles = "Manager")]
         // GET: Applications/Edit/5

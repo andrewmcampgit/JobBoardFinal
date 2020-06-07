@@ -7,7 +7,11 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+
+    }
 </p>
 <table class="table">
     <tr>
@@ -21,32 +25,39 @@
             @Html.DisplayNameFor(model => model.State)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+           Store Manager
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.LocationId}, new { @class = "btn btn-dark" }) |
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetail.FullName)
+            </td>
+            <td>
 
-            @Html.ActionLink("Details", "Details", new { id = item.LocationId }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.LocationId}, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LocationId }, new { @class = "btn btn-dark" }) @:|
+
+                    @Html.ActionLink("Details", "Details", new { id = item.LocationId }, new { @class = "btn btn-primary" }) @:|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LocationId }, new { @class = "btn btn-danger" })
+
+                }
+
+            </td>
+        </tr>
+    }
 
 </table>

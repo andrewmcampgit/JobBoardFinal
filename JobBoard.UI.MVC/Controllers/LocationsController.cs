@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin, Manager")]
     public class LocationsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
@@ -24,6 +24,7 @@ namespace JobBoard.UI.MVC.Controllers
             return View(locations.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Details/5
         public ActionResult Details(int? id)
         {
@@ -39,6 +40,7 @@ namespace JobBoard.UI.MVC.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Create
         public ActionResult Create()
         {
@@ -73,7 +75,7 @@ namespace JobBoard.UI.MVC.Controllers
 
 
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: Locations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -92,6 +94,7 @@ namespace JobBoard.UI.MVC.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -141,6 +144,7 @@ namespace JobBoard.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "LocationId,StoreNumber,City,State,ManagerId")] Location location)
         {
             if (ModelState.IsValid)
@@ -154,6 +158,7 @@ namespace JobBoard.UI.MVC.Controllers
         }
 
         // GET: Locations/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

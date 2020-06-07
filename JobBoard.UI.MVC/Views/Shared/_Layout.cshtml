@@ -58,8 +58,11 @@
 
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-
+                    @if(User.IsInRole("Admin")|| User.IsInRole("Employee")|| User.IsInRole("Manager"))
+                    {
                     <li>@Html.ActionLink("Open Positions", "Index", "OpenPositions")</li>
+                    }
+                    
                     @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
