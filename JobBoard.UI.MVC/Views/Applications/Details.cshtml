@@ -76,8 +76,13 @@
 <p>
     @if (User.IsInRole("Manager"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationId }, new { @class = "btn btn-dark" })  @:|
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationId }, new { @class = "btn btn-dark" }) @:|
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "MyApplications", null, new { @class = "btn btn-primary" })
     }
 
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+
 </p>

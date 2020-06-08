@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobBoard.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace JobBoard.UI.MVC.Controllers
 {
@@ -94,7 +95,19 @@ namespace JobBoard.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
+            if (User.IsInRole("Manager"))
+            {
+                string currentUserID = User.Identity.GetUserId();
+                var managerLocations = db.Locations.Where(loc => loc.ManagerId == currentUserID);
+                ViewBag.LocationId = new SelectList(managerLocations, "LocationId", "City", openPosition.LocationId);
+
+            }
+            else
+            {
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City", openPosition.LocationId);
+
+            }
+
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", openPosition.PositionId);
             return View(openPosition);
         }
