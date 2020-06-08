@@ -55,20 +55,27 @@
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-
+                    
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-                    @if(User.IsInRole("Admin")|| User.IsInRole("Employee")|| User.IsInRole("Manager"))
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Manager"))
                     {
-                    <li>@Html.ActionLink("Open Positions", "Index", "OpenPositions")</li>
+                        @Html.ActionLink("Open Positions", "Index", "OpenPositions")
+
                     }
-                    
+
+
+
                     @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
                     {
+
                         <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
                         <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
                         <li>@Html.ActionLink("Positions", "Index", "Positions")</li>
+
                     }
+
 
                     @if (User.IsInRole("Admin"))
                     {
@@ -78,9 +85,8 @@
                     {
                         <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
                     }
-                    <li>
-                        @Html.Partial("_LoginPartial")
-                    </li>
+
+                    @Html.Partial("_LoginPartial")
 
                 </ul>
 

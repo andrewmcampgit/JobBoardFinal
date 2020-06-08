@@ -22,8 +22,8 @@ namespace JobBoard.Data.EF
         public int ApplicationStatusId { get; set; }
         public string ResumeFilename { get; set; }
     
+        public virtual ApplicationStatu ApplicationStatu { get; set; }
         public virtual OpenPosition OpenPosition { get; set; }
         public virtual UserDetail UserDetail { get; set; }
-        public virtual ApplicationStatu ApplicationStatu { get; set; }
     }
 }

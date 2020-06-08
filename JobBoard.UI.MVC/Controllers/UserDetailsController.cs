@@ -11,7 +11,7 @@ using JobBoard.Data.EF;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-    
+
     public class UserDetailsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
@@ -22,7 +22,7 @@ namespace JobBoard.UI.MVC.Controllers
         {
             return View(db.UserDetails.ToList());
         }
-        [Authorize(Roles ="Employee, Manager, Admin")]
+        [Authorize(Roles = "Employee, Manager, Admin")]
         // GET: UserDetails/Details/5
         public ActionResult Details(string id)
         {
@@ -64,15 +64,13 @@ namespace JobBoard.UI.MVC.Controllers
                     resumeFile.SaveAs(path + fileName);
                     userDetail.ResumeFileName = fileName;
                 }
-                
-                
-                   
-                }
 
-                db.UserDetails.Add(userDetail);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
+
+            db.UserDetails.Add(userDetail);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
 
 

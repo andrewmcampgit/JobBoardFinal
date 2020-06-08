@@ -48,6 +48,17 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "btn btn-dark" }) |
+    @if (User.IsInRole("Employee"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "btn btn-dark" }) 
+
+        
+    }
+    @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
+    {
+
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    }
+
+
 </p>
