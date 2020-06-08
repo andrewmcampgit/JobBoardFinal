@@ -23,7 +23,38 @@ namespace JobBoard.UI.MVC.Controllers
             return View(openPositions.ToList());
         }
 
-        
+        public ActionResult ColumbiaIndex()
+        {
+            var openPositions = db.OpenPositions.Where(o => o.LocationId == 1).Include(o => o.Position);
+            return View(openPositions.ToList());
+        }
+        public ActionResult LenexaIndex()
+        {
+            var openPositions = db.OpenPositions.Where(o => o.LocationId == 2).Include(o => o.Position);
+            return View(openPositions.ToList());
+        }
+        public ActionResult SanDiegoIndex()
+        {
+            var openPositions = db.OpenPositions.Where(o => o.LocationId == 3).Include(o => o.Position);
+            return View(openPositions.ToList());
+        }
+        public ActionResult LasVegasIndex()
+        {
+            var openPositions = db.OpenPositions.Where(o => o.LocationId == 4).Include(o => o.Position);
+            return View(openPositions.ToList());
+        }
+        public ActionResult BostonIndex()
+        {
+            var openPositions = db.OpenPositions.Where(o => o.LocationId == 5).Include(o => o.Position);
+            return View(openPositions.ToList());
+        }
+        public ActionResult DoverIndex()
+        {
+            var openPositions = db.OpenPositions.Where(o => o.LocationId == 6).Include(o => o.Position);
+            return View(openPositions.ToList());
+        }
+
+
         // GET: OpenPositions/Details/5
         public ActionResult Details(int? id)
         {

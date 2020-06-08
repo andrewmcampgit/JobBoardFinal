@@ -556,6 +556,12 @@
     <Content Include="_Archive\assets\vendor\remixicon\remixicon.woff2" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Applications\MyApplications.cshtml" />
+    <Content Include="Views\OpenPositions\ColumbiaIndex.cshtml" />
+    <Content Include="Views\OpenPositions\LenexaIndex.cshtml" />
+    <Content Include="Views\OpenPositions\SanDiegoIndex.cshtml" />
+    <Content Include="Views\OpenPositions\LasVegasIndex.cshtml" />
+    <Content Include="Views\OpenPositions\BostonIndex.cshtml" />
+    <Content Include="Views\OpenPositions\DoverIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

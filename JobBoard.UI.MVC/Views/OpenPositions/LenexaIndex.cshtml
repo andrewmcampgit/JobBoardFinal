@@ -1,0 +1,75 @@
+﻿@model IEnumerable<JobBoard.Data.EF.OpenPosition>
+
+@{
+    ViewBag.Title = "Lenexa Positions";
+
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+@if (Model.Count() == 0)
+{
+    <h3 style="color: red;">No Positions avaialable at this time.</h3>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Location.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position.Title)
+            </th>
+            @if (User.IsInRole("Employee"))
+            {
+                <th></th>
+            }
+
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position.Title)
+                </td>
+                @if (User.IsInRole("Employee"))
+                {
+                    <td>
+                        <div>
+                            @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = item.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-center" }))
+                            {
+                                <input type="submit" name="applyButton" class="btn btn-info btn-xs" value="Single Click Apply!" />
+                            }
+
+                        </div>
+                    </td>
+                }
+
+                <td>
+
+                    @if (User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }, new { @class = "btn btn-primary" })
+                    }
+                    else
+                    {
+
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }, new { @class = "btn btn-dark" }) @:|
+                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }, new { @class = "btn btn-primary" }) @:|
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId }, new { @class = "btn btn-danger" })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+}

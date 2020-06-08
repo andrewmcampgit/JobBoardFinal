@@ -98,7 +98,7 @@
 
         <br />
         <br />
-        <div class="container"> @RenderBody()</div>
+        <div class="container border rounded"> @RenderBody()</div>
     </main><!-- End #main -->
     <!-- ======= Footer ======= -->
     <footer id="footer">
@@ -142,7 +142,7 @@
     @RenderSection("scripts", required: false)
     <script>
         //adds a class=row to every form
-        $(".form-horizontal").wrap("<div class='row'></div>");
+        $(".form-horizontal").wrap("<div class='row' style='padding-left: 10px'></div > ");
 
         //gives paddingLeft to form group child elements
         let formGroup = document.querySelectorAll(".form-group div");
