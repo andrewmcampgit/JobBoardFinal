@@ -46,7 +46,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
-            <a href="@Url.Action("Home","Index")">
+            <a href="@Url.Action("Index","Home")">
                 <img src="~/_Archive/Logo/eeae266a-fa97-4bd0-b6dc-0964b6380dc7_200x200.png" style="max-height:40px;" />
 
             </a>
@@ -61,7 +61,10 @@
 
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Manager"))
                     {
+                    <li>
                         @Html.ActionLink("Open Positions", "Index", "OpenPositions")
+
+                    </li>
 
                     }
 
@@ -86,7 +89,7 @@
                         <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
                     }
 
-                    @Html.Partial("_LoginPartial")
+                        <li>@Html.Partial("_LoginPartial")</li>
 
                 </ul>
 

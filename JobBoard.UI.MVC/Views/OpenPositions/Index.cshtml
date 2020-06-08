@@ -5,8 +5,12 @@
 }
 
 
-@if (User.IsInRole("Manager"))
+@if (User.IsInRole("Manager")|| User.IsInRole("Admin"))
 {
+    <h2>
+        @ViewBag.Title
+    </h2>
+    <br />
     <p>
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
     </p>
