@@ -55,16 +55,17 @@
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    
+
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Filters", "OpenPositionFilter", "Filters")</li>
 
 
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Manager"))
                     {
-                    <li>
-                        @Html.ActionLink("Open Positions", "Index", "OpenPositions")
+                        <li>
+                            @Html.ActionLink("Open Positions", "Index", "OpenPositions")
 
-                    </li>
+                        </li>
 
                     }
 
@@ -89,7 +90,7 @@
                         <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
                     }
 
-                        <li>@Html.Partial("_LoginPartial")</li>
+                    <li>@Html.Partial("_LoginPartial")</li>
 
                 </ul>
 

@@ -106,3 +106,7 @@ C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\s
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\obj\Debug\JobBoard.UI.MVC.csproj.CopyComplete
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\obj\Debug\JobBoard.UI.MVC.dll
 C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\obj\Debug\JobBoard.UI.MVC.pdb
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\PagedList.dll
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\PagedList.Mvc.dll
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\PagedList.xml
+C:\Users\andrew.camp\Documents\Visual Studio 2017\Projects\12_PROJECT\JobBoard\src\JobBoard.UI.MVC\bin\PagedList.Mvc.xml

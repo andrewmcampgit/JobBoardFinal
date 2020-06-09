@@ -30,6 +30,7 @@ namespace JobBoard.UI.MVC
                 "~/Content/assets/vendor/owl.carousel/owl.carousel.min.js",
                 "~/Content/assets/vendor/aos/aos.js",
                 "~/Content/assets/js/main.js",
+                "~/Scripts/Datatables/jquery.dataTables.min.js",
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
@@ -43,6 +44,7 @@ namespace JobBoard.UI.MVC
                 "~/Content/assets/vendor/owl.carousel/~/Content/assets/owl.carousel.min.css",
                 "~/Content/assets/vendor/aos/aos.css",
                 "~/Content/assets/vendor/remixicon/remixicon.css",
+                "~/Content/assets/Datatables/jquery.dataTables.min.css",
                 "~/Content/assets/css/style.css",
                 "~/Content/bootstrap.css",
                       "~/Content/site.css"));
