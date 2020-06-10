@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobBoard.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace JobBoard.UI.MVC.Controllers
 {
@@ -35,6 +36,11 @@ namespace JobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
+            var userId = User.Identity.GetUserId();
+            var user = db.AspNetUsers.FirstOrDefault(u => u.Id == userId);
+            var email = user.Email;
+            ViewBag.Email = email;
+
             return View(userDetail);
         }
         [Authorize(Roles = "Employee")]

@@ -37,8 +37,21 @@
 
         main {
             margin-bottom: 200px;
+            padding-bottom: 140px;
+            padding-top: 60px;
+        }
+        body{
+            padding-bottom: 0;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-1.10.0.min.js"
+            integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE="
+            crossorigin="anonymous">
+
+    </script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -57,18 +70,13 @@
                 <ul>
 
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Filters", "OpenPositionFilter", "Filters")</li>
 
 
-                    @if (User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Manager"))
+                    @if (User.IsInRole("Manager") || User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
-                        <li>
-                            @Html.ActionLink("Open Positions", "Index", "OpenPositions")
-
-                        </li>
+                        <li>@Html.ActionLink("Open Positions", "OpenPositionFilter", "Filters")</li>
 
                     }
-
 
 
                     @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
@@ -84,11 +92,9 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Application Status", "Index", "ApplicationStatus")</li>
-                    }
-                    @if (User.IsInRole("Admin"))
-                    {
                         <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
                     }
+
 
                     <li>@Html.Partial("_LoginPartial")</li>
 
@@ -108,7 +114,11 @@
 
         <br />
         <br />
-        <div class="container border rounded"> @RenderBody()</div>
+        <div class="container border rounded">
+            @RenderBody()
+
+        </div>
+
     </main><!-- End #main -->
     <!-- ======= Footer ======= -->
     <footer id="footer">
@@ -149,6 +159,11 @@
     <!-- Template Main JS File -->
     @*<script src="~/Content/assets/js/main.js"></script>*@
     @Scripts.Render("~/bundles/bootstrap")
+    <!--ADDEDjQuery UI CDN-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- ADDED jQuery Ajax CDN-->
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
     @RenderSection("scripts", required: false)
     <script>
         //adds a class=row to every form
@@ -168,6 +183,7 @@
 
 
     </script>
+
 
 </body>
 

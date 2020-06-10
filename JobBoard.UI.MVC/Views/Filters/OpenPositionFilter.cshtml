@@ -1,49 +1,110 @@
 ﻿@model IEnumerable<JobBoard.Data.EF.OpenPosition>
 
 @{
-
+    ViewBag.Title = "Open Positions";
 }
 
+<h2> @ViewBag.Title</h2>
+
+<br />
+<br />
+@if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+{
 
 
-
-    <table class="table data-table table-striped">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Location.StoreNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Position.Title)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+    <p>
+        @Html.ActionLink("Create New", "Create", "OpenPositions", null, new { @class = "btn btn-success" })
+    </p>
+}
+<br />
+<table class="table data-table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Location.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position.Title)
+            </th>
+            @if (User.IsInRole("Employee"))
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location.StoreNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Position.Title)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId })
-                    </td>
-                </tr>
+                <th></th>
             }
-        </tbody>
-    </table>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.City)
+                </td>
+                <td>
+                    <a href="" class="DetailsLink" id="@item.OpenPositionId">
 
+                        @Html.DisplayFor(modelItem => item.Position.Title)
+                    </a>
+                </td>
+                @if (User.IsInRole("Employee"))
+                {
+                    <td>
+                        <div>
+                            @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = item.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-center" }))
+                            {
+                                <input type="submit" name="applyButton" class="btn btn-info btn-xs" value="Single Click Apply!" />
+                            }
+
+                        </div>
+                    </td>
+                }
+
+
+
+
+               
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div id="OPDetails"></div>
 @section scripts{
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".data-table").DataTable();
         });
+
+        //$("#btnLink").click(function () {
+        //    $('#ModalPopUp').modal('show');
+        //})
+
+        $('a.DetailsLink').click(function (e) {
+
+            e.preventDefault();//this prevents default behavior
+
+            //target the popup placeholder, pass it data (this clicked link ID)
+            //then we will apply jQueryUI dialog plugin to make it a popup w/ various settings.
+            //Open PublisherDEtails partial view in the popup
+            $("#OPDetails").data('pId', $(this).attr('id')).dialog({
+                width: 700,
+                height: 500,
+                open: function () {
+                    var pubID = $(this).data('pId');
+                    $(this).load("/OpenPositions/PartialDetails/" + pubID);
+                },
+                title: "Open Position Details",
+                modal: true,
+                resizable: false
+
+            });
+        });
+
     </script>
 }
+
 

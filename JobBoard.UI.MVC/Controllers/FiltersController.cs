@@ -18,6 +18,7 @@ namespace JobBoard.UI.MVC.Controllers
         // GET: Filters
         public ActionResult OpenPositionFilter()
         {
+            
             var openPositions = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
             return View(openPositions.ToList());
         }

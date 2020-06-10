@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<JobBoard.Data.EF.Application>
 
 @{
-    
+
     if (User.IsInRole("Manager"))
     {
         ViewBag.Title = "Applications For Your Open Positions";
@@ -14,9 +14,8 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
+<br />
+<br />
 <table class="table">
     <tr>
         <th>
@@ -30,15 +29,9 @@
             Position
         </th>
         <th>
-            @if (User.IsInRole("Admin"))
-            {
-                @Html.DisplayNameFor(model => model.UserDetail.FullName)
-
-            }
-            else
-            {
+            
                 @Html.DisplayName("Applicant Name")
-            }
+            
 
         </th>
         <th>

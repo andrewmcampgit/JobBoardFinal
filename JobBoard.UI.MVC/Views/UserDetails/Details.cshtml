@@ -1,4 +1,7 @@
-﻿@model JobBoard.Data.EF.UserDetail
+﻿@using Microsoft.AspNet.Identity;
+@using JobBoard.Data.EF;
+@model JobBoard.Data.EF.UserDetail
+
 
 @{
     ViewBag.Title = "Details for: " + @Model.FullName;
@@ -7,15 +10,26 @@
 <h2>@ViewBag.Title</h2>
 <br /><br />
 <div>
-    
+
     <dl class="dl-horizontal">
 
         <dt>
             @Html.DisplayNameFor(model => model.UserId)
         </dt>
 
+
         <dd>
             @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt>
+            Email
+        </dt>
+
+
+        <dd>
+            @ViewBag.Email
+
+
         </dd>
 
         <dt>
@@ -39,10 +53,10 @@
         </dt>
 
         <dd>
-            <div class="col-md-10">
-                <a href="@Url.Content("~/Content/Resumes/"+ Model.ResumeFileName)" target="_blank">Click to View!</a>
 
-            </div>
+            <a href="@Url.Content("~/Content/Resumes/"+ Model.ResumeFileName)" target="_blank">Click to View!</a>
+
+
         </dd>
 
     </dl>
@@ -50,14 +64,14 @@
 <p>
     @if (User.IsInRole("Employee"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "btn btn-dark" }) 
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "btn btn-dark" })
 
-        
+
     }
-    @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
     {
 
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
     }
 
 

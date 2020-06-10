@@ -17,11 +17,24 @@ namespace JobBoard.UI.MVC.Controllers
         private JobBoardEntities db = new JobBoardEntities();
 
         // GET: OpenPositions
-        
+
         public ActionResult Index()
         {
-            var openPositions = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
-            return View(openPositions.ToList());
+            if (User.IsInRole("Employee"))
+            {
+                var openPositions = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
+                return View(openPositions.ToList());
+            }
+            else
+            {
+                var userId = User.Identity.GetUserId();
+                var managerLocation = db.Locations.Where(l => l.ManagerId == userId).FirstOrDefault();
+                var manLocID = managerLocation.LocationId;
+                var openPositions = db.OpenPositions.Where(o => o.LocationId == manLocID).Include(o => o.Location).Include(o => o.Position);
+
+                return View(openPositions.ToList());
+            }
+
         }
 
         public ActionResult ColumbiaIndex()
@@ -70,12 +83,29 @@ namespace JobBoard.UI.MVC.Controllers
             }
             return View(openPosition);
         }
+        public PartialViewResult PartialDetails(int? id)
+        {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            OpenPosition openPosition = db.OpenPositions.Find(id);
+            //if (openPosition == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return PartialView(openPosition);
+        }
 
         // GET: OpenPositions/Create
         [Authorize(Roles = "Manager")]
         public ActionResult Create()
         {
-            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City");
+            string currentUserID = User.Identity.GetUserId();
+            var managerLocations = db.Locations.Where(loc => loc.ManagerId == currentUserID);
+            ViewBag.LocationId = new SelectList(managerLocations, "LocationId", "City");
+
+
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title");
             return View();
         }
@@ -104,7 +134,7 @@ namespace JobBoard.UI.MVC.Controllers
             }
             else
             {
-            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City", openPosition.LocationId);
+                ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City", openPosition.LocationId);
 
             }
 
@@ -124,6 +154,16 @@ namespace JobBoard.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
+            if (User.IsInRole("Manager"))
+            {
+                string currentUserID = User.Identity.GetUserId();
+                var managerLocations = db.Locations.Where(loc => loc.ManagerId == currentUserID);
+                ViewBag.LocationId = new SelectList(managerLocations, "LocationId", "City");
+
+                ViewBag.Message = "You can't edit this Position.";
+            }
+
+
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City", openPosition.LocationId);
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", openPosition.PositionId);
             return View(openPosition);

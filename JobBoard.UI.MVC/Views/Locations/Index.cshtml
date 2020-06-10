@@ -47,7 +47,7 @@
             </td>
             <td>
 
-                @if (User.IsInRole("Admin")  || User.IsInRole("Manager"))
+                @if (User.IsInRole("Admin"))
                     {
                         @Html.ActionLink("Edit", "Edit", new { id = item.LocationId }, new { @class = "btn btn-dark" }) @:|
 

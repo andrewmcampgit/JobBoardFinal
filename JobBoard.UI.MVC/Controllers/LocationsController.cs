@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace JobBoard.UI.MVC.Controllers
 {
-    [Authorize(Roles = "Admin, Manager")]
+    [Authorize(Roles = "Admin")]
     public class LocationsController : Controller
     {
         private JobBoardEntities db = new JobBoardEntities();
@@ -45,30 +45,46 @@ namespace JobBoard.UI.MVC.Controllers
         public ActionResult Create()
         {
 
-            //retrieve all users
-            var allUsers = db.AspNetUsers;
+            ////retrieve all users
+            //var allUsers = db.AspNetUsers;
 
-            //role selection
-            var managerRole = db.AspNetRoles.Where(r => r.Name == "Admin");
+            ////role selection
+            //var managerRole = db.AspNetRoles.Where(r => r.Name == "Admin");
 
-            //create a list to hold all users in that role
-            var managers = new List<AspNetUser>();
+            ////create a list to hold all users in that role
+            //var managers = new List<UserDetail>();
 
-            //loop through all users in that role
-            foreach (var a in allUsers)
+            ////loop through all users in that role
+            //foreach (var a in allUsers)
+            //{
+            //    foreach (var r in managerRole)
+            //    {
+            //        //if the user is found as a value in the roles nav, add to list\
+            //        if (r.AspNetUsers.Contains(a))
+            //        {
+            //            managers.Add(a);
+            //        }
+            //    }
+            //}
+
+            var manager = db.Locations;
+            var userDetails = db.UserDetails;
+            var details = new List<UserDetail>();
+            foreach (var item in manager)
             {
-                foreach (var r in managerRole)
+                foreach (var ud in userDetails)
                 {
-                    //if the user is found as a value in the roles nav, add to list\
-                    if (r.AspNetUsers.Contains(a))
+                    if (item.ManagerId == ud.UserId)
                     {
-                        managers.Add(a);
+                        details.Add(ud);
                     }
                 }
-            }
 
-           
-            ViewBag.ManagerId = new SelectList(managers, "UserId", "FullName");
+            }
+            ViewBag.ManagerId = new SelectList(details, "UserId", "FullName");
+
+
+            //ViewBag.ManagerId = new SelectList(managers, "Id", "FullName");
             return View();
         }
 

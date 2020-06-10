@@ -44,7 +44,7 @@ namespace JobBoard.UI.MVC
                 "~/Content/assets/vendor/owl.carousel/~/Content/assets/owl.carousel.min.css",
                 "~/Content/assets/vendor/aos/aos.css",
                 "~/Content/assets/vendor/remixicon/remixicon.css",
-                "~/Content/assets/Datatables/jquery.dataTables.min.css",
+                "~/Content/assets/Datatables/css/jquery.dataTables.min.css",
                 "~/Content/assets/css/style.css",
                 "~/Content/bootstrap.css",
                       "~/Content/site.css"));

@@ -143,6 +143,9 @@ namespace JobBoard.UI.MVC.Controllers
 
             db.Applications.Add(application);
             db.SaveChanges();
+            ViewBag.OpenPositionId = new SelectList(db.OpenPositions, "OpenPositionId", "OpenPositionId", application.OpenPositionId);
+            ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "FirstName", application.UserId);
+            ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return RedirectToAction("MyApplications");
 
 
@@ -161,7 +164,7 @@ namespace JobBoard.UI.MVC.Controllers
                 return HttpNotFound();
             }
             ViewBag.OpenPositionId = new SelectList(db.OpenPositions, "OpenPositionId", "OpenPositionId", application.OpenPositionId);
-            ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "FirstName", application.UserId);
+            ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "Id", application.UserId);
             ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return View(application);
         }
@@ -181,7 +184,7 @@ namespace JobBoard.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.OpenPositionId = new SelectList(db.OpenPositions, "OpenPositionId", "OpenPositionId", application.OpenPositionId);
-            ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "FirstName", application.UserId);
+            ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "Id", application.UserId);
             ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return View(application);
         }

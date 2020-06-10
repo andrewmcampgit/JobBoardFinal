@@ -2,14 +2,14 @@
 
 @{
     ViewBag.Title = "My Applications";
-   
+
 }
 
 <h2>@ViewBag.Title</h2>
 <br />
 <br />
 
-@if(Model.Count() == 0)
+@if (Model.Count() == 0)
 {
     <h3 style="color: red;">You haven't submitted an Application yet. Go to Open Positions <a href="@Url.Action("Index","OpenPositions")">HERE</a></h3>
 }
@@ -60,14 +60,51 @@ else
                     @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
                 </td>
                 <td>
+                    <a href="" class="DetailsLink btn btn-primary" id="@item.OpenPositionId">
 
-                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-primary" })
-
+                        Details
+                    </a>
                 </td>
             </tr>
         }
 
     </table>
 }
+<div id="OPDetails"></div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".data-table").DataTable();
+        });
+
+        //$("#btnLink").click(function () {
+        //    $('#ModalPopUp').modal('show');
+        //})
+
+        $('a.DetailsLink').click(function (e) {
+
+            e.preventDefault();//this prevents default behavior
+
+            //target the popup placeholder, pass it data (this clicked link ID)
+            //then we will apply jQueryUI dialog plugin to make it a popup w/ various settings.
+            //Open PublisherDEtails partial view in the popup
+            $("#OPDetails").data('pId', $(this).attr('id')).dialog({
+                width: 700,
+                height: 500,
+                open: function () {
+                    var pubID = $(this).data('pId');
+                    $(this).load("/OpenPositions/PartialDetails/" + pubID);
+                },
+                title: "Open Position Details",
+                modal: true,
+                resizable: false
+
+            });
+        });
+
+    </script>
+}
+
+
 
 

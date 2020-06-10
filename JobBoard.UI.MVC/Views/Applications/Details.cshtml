@@ -74,7 +74,7 @@
     </dl>
 </div>
 <p>
-    @if (User.IsInRole("Manager"))
+    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationId }, new { @class = "btn btn-dark" }) @:|
         @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
