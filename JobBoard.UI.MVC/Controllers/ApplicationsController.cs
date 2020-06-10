@@ -29,42 +29,39 @@ namespace JobBoard.UI.MVC.Controllers
             else
             {
                 var userID = User.Identity.GetUserId();
+                var managerLocation = db.Locations.Where(l => l.ManagerId == userID);
 
-
-                var managerLocation = db.Locations.Where(l => l.ManagerId == userID).FirstOrDefault();
-                var manLocID = managerLocation.LocationId;
-                var openPositions = db.OpenPositions.Where(o => o.LocationId == manLocID).ToList();
-
-                List<int> OPList = new List<int>();
-
-                List<int> manAppIds = new List<int>();
-
-                foreach (var item in openPositions)
+                // create list of openpositions to return (start empty)
+                List<OpenPosition> myLocationsOPs = new List<OpenPosition>();
+                //create list of my location's Applications to return (start empty)
+                List<Application> mylocationsApps = new List<Application>();
+                //loop through each mgr location and get all openPositions for that location, then add each of those to openPositions
+                foreach (var loc in managerLocation)
                 {
-                    var Id = openPositions.Select(o => o.OpenPositionId).FirstOrDefault();
-                    OPList.Add(Id);
-                    var application = db.Applications.Select(o => o.OpenPositionId).FirstOrDefault();
-                    if (Id == application)
+                    var thisLocOpenPositions = loc.OpenPositions;
+                    foreach (OpenPosition op in thisLocOpenPositions)
                     {
-                        manAppIds.Add(application);
+                        myLocationsOPs.Add(op);
                     }
-
                 }
-                List<Application> apps = new List<Application>();
-                foreach (var item in manAppIds)
+                //loop through each of the mgr's OpenPositions to get all applications for that OP, then
+                //add each of those applications.
+                foreach (OpenPosition op in myLocationsOPs)
                 {
-                    foreach (var a in db.Applications)
+                    var thisOPsApps = op.Applications;
+                    foreach (Application app in thisOPsApps)
                     {
-                        
-                        if (item == a.OpenPositionId)
-                        {
-                            apps.Add(a);
-                        }
+                        mylocationsApps.Add(app);
                     }
-
                 }
+                var applications = mylocationsApps
+                    .OrderByDescending(a => a.ApplicationDate)
+                    .ThenBy(a => a.UserId).ToList();
 
-                return View(apps.ToList());
+                return View(applications);
+                
+
+                
             }
 
 
@@ -183,8 +180,8 @@ namespace JobBoard.UI.MVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.OpenPositionId = new SelectList(db.OpenPositions, "OpenPositionId", "OpenPositionId", application.OpenPositionId);
-            ViewBag.UserId = new SelectList(db.UserDetails, "UserId", "Id", application.UserId);
+            ViewBag.OpenPositionId = application.OpenPositionId;
+            ViewBag.UserId = application.UserId;
             ViewBag.ApplicationStatusId = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName", application.ApplicationStatusId);
             return View(application);
         }

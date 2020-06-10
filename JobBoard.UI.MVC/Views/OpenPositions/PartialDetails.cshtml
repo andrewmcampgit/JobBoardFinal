@@ -1,23 +1,25 @@
 ﻿@model JobBoard.Data.EF.OpenPosition
 
 @{
-    ViewBag.Title = "Open Position for " + Model.Position.Title;
+                
+
+                ViewBag.Title = "Open Position for " + Model.Position.Title;
 }
 <div>
     <h4>@ViewBag.Title</h4>
     <hr />
     @if (User.IsInRole("Employee"))
     {
-    <div>
-        @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = Model.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post))
-        {
-            <input type="submit" name="applyButton" class="btn btn-primary" value="Single Click Apply!" />
-        }
-        <br />
-        <br />
-    </div>
+        <div>
+            @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = Model.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post))
+            {
+                <input type="submit" name="applyButton" class="btn btn-primary" value="Single Click Apply!" />
+            }
+            <br />
+            <br />
+        </div>
     }
-    
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Location.City)
@@ -46,9 +48,9 @@
 </div>
 @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
 {
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OpenPositionId }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Delete", "Delete", new { id = Model.OpenPositionId }, new { @class = "btn btn-danger" })
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.OpenPositionId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.OpenPositionId }, new { @class = "btn btn-danger" })
 
-</p>
-}
+    </p>
+        }

@@ -7,11 +7,15 @@
         <li class="drop-down">
             <a href="@Url.Action("Details", "UserDetails",  new { id = User.Identity.GetUserId()}) ">Account</a>
             <ul>
+                @if(User.IsInRole("Employee")||(User.IsInRole("Manager")))
+                {
                 <li class="nav-item">
                     @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Details", "UserDetails", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
 
                     @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })*@
                 </li>
+                }
+                
                 @if (User.IsInRole("Employee"))
                 {
                     <li>@Html.ActionLink(" My Applications", "MyApplications", "Applications")</li>

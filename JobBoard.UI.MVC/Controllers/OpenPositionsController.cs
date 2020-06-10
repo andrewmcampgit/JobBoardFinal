@@ -89,7 +89,7 @@ namespace JobBoard.UI.MVC.Controllers
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
-            OpenPosition openPosition = db.OpenPositions.Find(id);
+            var openPosition = db.OpenPositions.Find(id);
             //if (openPosition == null)
             //{
             //    return HttpNotFound();
