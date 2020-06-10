@@ -42,10 +42,21 @@
                     @Html.DisplayFor(modelItem => item.Location.City)
                 </td>
                 <td>
-                    <a href="" class="DetailsLink" id="@item.OpenPositionId">
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <a href="" class="DetailsLink" id="@item.OpenPositionId">
 
-                        @Html.DisplayFor(modelItem => item.Position.Title)
-                    </a>
+                            @Html.DisplayFor(modelItem => item.Position.Title)
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "Applications")">
+
+                            @Html.DisplayFor(modelItem => item.Position.Title)
+                        </a>
+                    }
+
                 </td>
                 @if (User.IsInRole("Employee"))
                 {

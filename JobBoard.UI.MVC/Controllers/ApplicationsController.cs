@@ -56,7 +56,7 @@ namespace JobBoard.UI.MVC.Controllers
                     foreach (var a in db.Applications)
                     {
                         
-                        if (item == a.ApplicationId)
+                        if (item == a.OpenPositionId)
                         {
                             apps.Add(a);
                         }
@@ -64,7 +64,7 @@ namespace JobBoard.UI.MVC.Controllers
 
                 }
 
-                return View(apps);
+                return View(apps.ToList());
             }
 
 

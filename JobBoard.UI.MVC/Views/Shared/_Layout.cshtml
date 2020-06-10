@@ -40,7 +40,8 @@
             padding-bottom: 140px;
             padding-top: 60px;
         }
-        body{
+
+        body {
             padding-bottom: 0;
         }
     </style>
@@ -79,18 +80,13 @@
                     }
 
 
-                    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
-                    {
-
-                        <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
-                        <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
-                        <li>@Html.ActionLink("Positions", "Index", "Positions")</li>
-
-                    }
+                   
 
 
                     @if (User.IsInRole("Admin"))
                     {
+                        <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
+                        <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
                         <li>@Html.ActionLink("Application Status", "Index", "ApplicationStatus")</li>
                         <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
                     }
