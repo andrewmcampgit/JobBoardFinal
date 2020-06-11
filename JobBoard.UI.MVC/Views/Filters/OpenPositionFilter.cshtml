@@ -30,8 +30,8 @@
             {
                 <th></th>
             }
-            
-            
+
+
         </tr>
     </thead>
     <tbody>
@@ -42,20 +42,13 @@
                     @Html.DisplayFor(modelItem => item.Location.City)
                 </td>
                 <td>
-                    @if (User.IsInRole("Employee"))
-                    {
-                        <a href="" class="DetailsLink" id="@item.OpenPositionId">
+                   
+                    <a href="" class="DetailsLink" id="@item.OpenPositionId">
 
-                            @Html.DisplayFor(modelItem => item.Position.Title)
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Index", "Applications")">
+                        @Html.DisplayFor(modelItem => item.Position.Title)
+                    </a>
 
-                            @Html.DisplayFor(modelItem => item.Position.Title)
-                        </a>
-                    }
+
 
                 </td>
                 @if (User.IsInRole("Employee"))
@@ -74,7 +67,7 @@
 
 
 
-               
+
 
             </tr>
         }
@@ -83,39 +76,44 @@
 
 
 
+
+
+
 <div id="OPDetails"></div>
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $(".data-table").DataTable();
+@section scripts{ 
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(document).ready(function () {
+        $(".data-table").DataTable();
+    });
+
+    //$("#btnLink").click(function () {
+    //    $('#ModalPopUp').modal('show');
+    //})
+
+    $('a.DetailsLink').click(function (e) {
+
+        e.preventDefault();//this prevents default behavior
+
+        //target the popup placeholder, pass it data (this clicked link ID)
+        //then we will apply jQueryUI dialog plugin to make it a popup w/ various settings.
+        //Open PublisherDEtails partial view in the popup
+        $("#OPDetails").data('pId', $(this).attr('id')).dialog({
+            width: 700,
+            height: 500,
+            open: function () {
+                var OpId = $(this).data('pId');
+                $(this).load("/OpenPositions/PartialDetails/" + OpId);
+            },
+            title: "Open Position Details",
+            modal: true,
+            resizable: false,
+            responsive: true
+
         });
+    });
 
-        //$("#btnLink").click(function () {
-        //    $('#ModalPopUp').modal('show');
-        //})
-
-        $('a.DetailsLink').click(function (e) {
-
-            e.preventDefault();//this prevents default behavior
-
-            //target the popup placeholder, pass it data (this clicked link ID)
-            //then we will apply jQueryUI dialog plugin to make it a popup w/ various settings.
-            //Open PublisherDEtails partial view in the popup
-            $("#OPDetails").data('pId', $(this).attr('id')).dialog({
-                width: 700,
-                height: 500,
-                open: function () {
-                    var OpId = $(this).data('pId');
-                    $(this).load("/OpenPositions/PartialDetails/" + OpId);
-                },
-                title: "Open Position Details",
-                modal: true,
-                resizable: false
-
-            });
-        });
-
-    </script>
+</script>
 }
 
 

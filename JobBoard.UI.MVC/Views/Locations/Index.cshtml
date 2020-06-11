@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.State)
         </th>
         <th>
-           Store Manager
+            Store Manager
         </th>
         <th></th>
     </tr>
@@ -48,16 +48,22 @@
             <td>
 
                 @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.LocationId }, new { @class = "btn btn-dark" }) @:|
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LocationId }, new { @class = "btn btn-dark" }) @:|
 
-                        @Html.ActionLink("Details", "Details", new { id = item.LocationId }, new { @class = "btn btn-primary" }) @:|
-                        @Html.ActionLink("Delete", "Delete", new { id = item.LocationId }, new { @class = "btn btn-danger" })
 
-                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.LocationId }, new { @class = "btn btn-primary" }) @:|
 
-                </td>
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LocationId }, new { @class = "btn btn-danger" })
+
+                }
+
+            </td>
         </tr>
     }
 
 </table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

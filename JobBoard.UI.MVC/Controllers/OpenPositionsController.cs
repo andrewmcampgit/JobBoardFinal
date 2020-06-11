@@ -17,7 +17,7 @@ namespace JobBoard.UI.MVC.Controllers
         private JobBoardEntities db = new JobBoardEntities();
 
         // GET: OpenPositions
-
+        
         public ActionResult Index()
         {
             if (User.IsInRole("Employee"))

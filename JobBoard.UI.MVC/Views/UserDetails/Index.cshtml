@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<JobBoard.Data.EF.UserDetail>
 
 @{
-    ViewBag.Title = "List of Site Users";
+    ViewBag.Title = "YI Staff";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -43,9 +43,9 @@
 
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.UserId },  new { @class = "btn btn-dark" }) |
-            @Html.ActionLink("Details", "Details", new { id = item.UserId }, new { @class = "btn btn-primary" })  |
-            @Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { @class = "btn btn-danger" }) 
+            
+            @Html.ActionLink("Details", "Details", new { id = item.UserId }, new { @class = "btn btn-primary" })
+            
         </td>
     </tr>
 }

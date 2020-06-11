@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using JobBoard.Data.EF;
 using System.Collections;
+using PagedList;
 
 namespace JobBoard.UI.MVC.Controllers
 {

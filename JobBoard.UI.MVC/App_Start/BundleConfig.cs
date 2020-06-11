@@ -19,6 +19,7 @@ namespace JobBoard.UI.MVC
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                
                 "~/Content/assets/vendor/jquery/jquery.min.js",
                 "~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
                 "~/Content/assets/vendor/jquery.easing/jquery.easing.min.js",
@@ -29,8 +30,8 @@ namespace JobBoard.UI.MVC
                 "~/Content/assets/vendor/waypoints/jquery.waypoints.min.js",
                 "~/Content/assets/vendor/owl.carousel/owl.carousel.min.js",
                 "~/Content/assets/vendor/aos/aos.js",
-                "~/Content/assets/js/main.js",
                 "~/Scripts/Datatables/jquery.dataTables.min.js",
+                "~/Content/assets/js/main.js",
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 

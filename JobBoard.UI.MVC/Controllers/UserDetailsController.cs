@@ -17,7 +17,7 @@ namespace JobBoard.UI.MVC.Controllers
     {
         private JobBoardEntities db = new JobBoardEntities();
 
-        [Authorize(Roles = "Manager, Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: UserDetails
         public ActionResult Index()
         {

@@ -16,72 +16,78 @@
 
 <br />
 <br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationDate)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.ResumeFilename)
-        </th>
-        <th>
-            Position
-        </th>
-        <th>
-            
-                @Html.DisplayName("Applicant Name")
-            
-
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table data-table table-striped">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationDate)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationDate)
+            </th>
 
-            <td>
-                @if (item.ResumeFilename != null)
-                {
-                    <a href="@Url.Content("~/Content/Resumes/"+ item.ResumeFilename)" target="_blank">View Resume</a>
-                }
-                else
-                {
-                    <p>N/A</p>
-                }
+            @*<th>
+                @Html.DisplayNameFor(model => model.ResumeFilename)
+            </th>*@
+            <th>
+                Position
+            </th>
+            <th>
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserDetail.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
-            </td>
-            @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Employee"))
-            {
+                @Html.DisplayName("Applicant Name")
 
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+            </th>
+            
+        </tr>
+    </thead>
+   
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationDate)
+                </td>
 
-                    @if (User.IsInRole("Manager"))
+                @*<td>
+                    @if (item.ResumeFilename != null)
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }, new { @class = "btn btn-dark" })
+                        <a href="@Url.Content("~/Content/Resumes/"+ item.ResumeFilename)" target="_blank">View Resume</a>
                     }
-                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-primary" })
+                    else
+                    {
+                        <p>N/A</p>
+                    }
 
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
+                </td>
+                <td>
+                    
+                    @Html.ActionLink(item.UserDetail.FullName, "Details", new { id = item.ApplicationId })
 
                 </td>
-            }
-        </tr>
-    }
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+                </td>
+               
+            </tr>
+
+
+        }
+    </tbody>
 
 </table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".data-table").DataTable();
+        });
+
+
+    </script>
+    }
+

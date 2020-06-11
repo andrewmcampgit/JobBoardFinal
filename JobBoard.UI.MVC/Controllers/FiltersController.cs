@@ -23,7 +23,9 @@ namespace JobBoard.UI.MVC.Controllers
             return View(openPositions.ToList());
         }
 
-       
+        
+
+
 
         protected override void Dispose(bool disposing)
         {

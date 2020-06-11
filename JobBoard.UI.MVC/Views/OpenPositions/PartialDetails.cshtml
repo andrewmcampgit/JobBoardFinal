@@ -1,24 +1,57 @@
 ﻿@model JobBoard.Data.EF.OpenPosition
+@using Microsoft.AspNet.Identity;
 
 @{
-                
 
-                ViewBag.Title = "Open Position for " + Model.Position.Title;
+
+    ViewBag.Title = "Open Position for " + Model.Position.Title;
 }
 <div>
     <h4>@ViewBag.Title</h4>
     <hr />
-    @if (User.IsInRole("Employee"))
+
+    @{
+        //jobs applied for
+        JobBoard.Data.EF.JobBoardEntities db = new JobBoard.Data.EF.JobBoardEntities();
+        //current user
+        //add using Microsoft.AspNet.Identity under @model up top
+        var currentUserID = User.Identity.GetUserId();
+        var appliedJobs = db.Applications.Where(MyAps => MyAps.UserId ==
+         currentUserID);
+    }
+
+    @*@Html.ActionLink("Details", "Details", new { id=item.OpenPositionID })*@
+    @if (appliedJobs.Where(aj => aj.OpenPositionId == Model.OpenPositionId).Count() == 0 && User.IsInRole("Employee"))
     {
-        <div>
-            @using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = Model.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post))
+        @Html.ActionLink("Apply Now", "Apply", new { id = Model.OpenPositionId }, new { @class = "btn btn-info" })
+
+    }
+
+    else
+    {
+        if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+        {
+            <p></p>
+        }
+        else
+        {
+            @:[-Applied-]
+        }
+
+    }
+    @*@Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionID })
+        |
+        @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionID })*@
+
+
+    <div>
+        @*@using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = Model.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post))
             {
                 <input type="submit" name="applyButton" class="btn btn-primary" value="Single Click Apply!" />
-            }
-            <br />
-            <br />
-        </div>
-    }
+            }*@
+       
+    </div>
+
 
     <dl class="dl-horizontal">
         <dt>
