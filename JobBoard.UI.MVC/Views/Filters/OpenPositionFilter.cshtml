@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.Location.City)
                 </td>
                 <td>
-                   
+
                     <a href="" class="DetailsLink" id="@item.OpenPositionId">
 
                         @Html.DisplayFor(modelItem => item.Position.Title)
@@ -79,41 +79,54 @@
 
 
 
+
 <div id="OPDetails"></div>
-@section scripts{ 
+@section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $(document).ready(function () {
-        $(".data-table").DataTable();
-    });
-
-    //$("#btnLink").click(function () {
-    //    $('#ModalPopUp').modal('show');
-    //})
-
-    $('a.DetailsLink').click(function (e) {
-
-        e.preventDefault();//this prevents default behavior
-
-        //target the popup placeholder, pass it data (this clicked link ID)
-        //then we will apply jQueryUI dialog plugin to make it a popup w/ various settings.
-        //Open PublisherDEtails partial view in the popup
-        $("#OPDetails").data('pId', $(this).attr('id')).dialog({
-            width: 700,
-            height: 500,
-            open: function () {
-                var OpId = $(this).data('pId');
-                $(this).load("/OpenPositions/PartialDetails/" + OpId);
-            },
-            title: "Open Position Details",
-            modal: true,
-            resizable: false,
-            responsive: true
-
+    <script>
+        $(document).ready(function () {
+            $(".data-table").DataTable();
         });
-    });
 
-</script>
+        //$("#btnLink").click(function () {
+        //    $('#ModalPopUp').modal('show');
+        //})
+
+        $('a.DetailsLink').click(function (e) {
+
+            e.preventDefault();
+
+            var width = 0;
+            if ($(window).width() <= 376) {
+                width = '350';
+                height = '400';
+            }
+            
+            else {
+                width = '600';
+                height = '400';
+            }
+            $("#OPDetails").data('pId', $(this).attr('id')).dialog({
+
+                width: width,
+                height: height,
+                open: function () {
+                    var OpId = $(this).data('pId');
+                    $(this).load("/OpenPositions/PartialDetails/" + OpId);
+
+                },
+                title: "Open Position Details",
+                modal: true,
+                resizable: false
+
+
+
+            });
+        });
+
+
+
+    </script>
 }
 
 

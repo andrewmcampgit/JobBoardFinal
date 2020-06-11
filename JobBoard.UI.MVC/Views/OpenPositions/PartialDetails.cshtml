@@ -23,7 +23,10 @@
     @*@Html.ActionLink("Details", "Details", new { id=item.OpenPositionID })*@
     @if (appliedJobs.Where(aj => aj.OpenPositionId == Model.OpenPositionId).Count() == 0 && User.IsInRole("Employee"))
     {
-        @Html.ActionLink("Apply Now", "Apply", new { id = Model.OpenPositionId }, new { @class = "btn btn-info" })
+        using (Html.BeginForm("singleClickApply", "Applications", new { @openPositionId = Model.OpenPositionId, @applicationStatusId = 1 }, FormMethod.Post, new { @class = "text-sm-left" }))
+        {
+            <input type="submit" name="applyButton" class="btn btn-info btn-xs" value="Single Click Apply!" />
+        }
 
     }
 
@@ -49,7 +52,7 @@
             {
                 <input type="submit" name="applyButton" class="btn btn-primary" value="Single Click Apply!" />
             }*@
-       
+
     </div>
 
 

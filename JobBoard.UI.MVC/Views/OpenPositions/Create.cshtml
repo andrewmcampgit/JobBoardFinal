@@ -38,9 +38,10 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "OpenPositionFilter","Filters",new { @class = "btn btn-primary mb-5" })
-</div>
+    <div>
+
+        <a href="@Url.Action("OpenPositionFilter","Filters")" class = "btn btn-primary mb-5" > Back to List</a>
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -32,11 +32,11 @@ namespace JobBoard.UI.MVC.Controllers
                 var userID = User.Identity.GetUserId();
                 var managerLocation = db.Locations.Where(l => l.ManagerId == userID);
 
-                // create list of openpositions to return (start empty)
+                
                 List<OpenPosition> myLocationsOPs = new List<OpenPosition>();
-                //create list of my location's Applications to return (start empty)
+                
                 List<Application> mylocationsApps = new List<Application>();
-                //loop through each mgr location and get all openPositions for that location, then add each of those to openPositions
+               
                 foreach (var loc in managerLocation)
                 {
                     var thisLocOpenPositions = loc.OpenPositions;
@@ -45,8 +45,7 @@ namespace JobBoard.UI.MVC.Controllers
                         myLocationsOPs.Add(op);
                     }
                 }
-                //loop through each of the mgr's OpenPositions to get all applications for that OP, then
-                //add each of those applications.
+                
                 foreach (OpenPosition op in myLocationsOPs)
                 {
                     var thisOPsApps = op.Applications;
